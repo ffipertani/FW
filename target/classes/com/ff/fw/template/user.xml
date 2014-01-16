@@ -1,0 +1,72 @@
+<page title="Utenti" xmlns="http://com.ff.fw.ac">
+    <controller id="userController">
+    	<controller id="groupController" pageSize="5"/>
+    </controller>
+    
+    <grid id="listaUtenti" controller="userController">
+        <column id="username" label="Username"/>
+        <column id="nome" label="Nome"/>
+        <column id="cognome" label="Cognome"/>
+        <column id="sesso" label="Sesso"/>
+    </grid>
+    <form id="editUtente" controller="userController">
+        <toolbar>
+            <button id="detail" label="Mostra dettaglio"/>
+            <button id="export" label="Esporta"/>
+        </toolbar>
+	    <text id="username" label="Username"/>
+	    <text id="nome" label="Nome"/>
+		<text id="cognome" label="Cognome"/>
+		<radioGroup id="sesso" label="Sesso">
+			<radio label="M" value="M"/>
+			<radio label="F" value="F"/> 
+		</radioGroup>
+	</form>
+    <tabPanel id="tabPanel">
+	    <tab id="tabGruppo" label="Gruppi" >
+	        <grid id="listaGruppi" controller="groupController">
+		        <column id="codice" label="Codice"/>
+		        <column id="descrizione" label="Descrizione"/>
+		    </grid>
+	    </tab>
+	    <tab id="tabProfilo" label="Profili">
+	        <grid id="listaProfili" controller="profileController">
+		        <column id="codice" label="Codice"/>
+		        <column id="descrizione" label="Descrizione"/>
+		    </grid>
+	    </tab>
+    </tabPanel>
+    <pageToolbar>
+        <button id="salva" label="Salva"/>
+        <button id="annulla" label="Annulla"/>
+    </pageToolbar>    
+    
+    <script>        
+        	var service = new Service("user");
+    	    var userController = ff.Controller.extend({
+  				id: "profileController",
+  				pageSize:10,
+  				onsave:function(model){save},
+  				onload:function(model){service.load(model)},
+  				onsearch:function(model,params){service.search(model,params)},
+  				ondelete:function(model){service.delete(model)}
+			});
+			userController.add(profileController);
+        
+        	function save(model){
+        		service.save(user);
+        	}
+        	
+        	detail.click(function(){
+        		var popup = new PopUp();
+        		var model = userController.model;
+        		service.loadDetail(model).done(function(detail){popup.model = detail;});
+        	});
+        	
+        	export.click(function(){
+        		var models = userController.models;
+        		createExcel(models);
+        	});
+        
+    </script>
+</page>
