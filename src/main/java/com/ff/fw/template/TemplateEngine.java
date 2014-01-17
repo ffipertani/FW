@@ -1,5 +1,8 @@
 package com.ff.fw.template;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,25 +21,33 @@ public class TemplateEngine {
 	
 	@Autowired NamespaceRegistry namespaceRegistry;
 	
-	
-	
-	public String parse(String file)throws Exception{
-		SAXReader reader = new SAXReader();
-        Document document = reader.read(file);
-        Element root = document.getRootElement();
-        TemplateContext context = new TemplateContext();
-        context.setCurrentElement(root);
-        context.setDocRoot(root);
-        TemplateContext.set(context);
-        Tag tag = parseElement();
-        TemplateContext.remove();
-        try{
-			String json =  mapper.writeValueAsString(tag);
-			return json;
+	public String parse(InputStream inputStream){
+		try{
+			SAXReader reader = new SAXReader();
+	        Document document = reader.read(inputStream);
+	        Element root = document.getRootElement();
+	        TemplateContext context = new TemplateContext();
+	        context.setCurrentElement(root);
+	        context.setDocRoot(root);
+	        TemplateContext.set(context);
+	        Tag tag = parseElement();
+	        TemplateContext.remove();
+	        try{
+				String json =  mapper.writeValueAsString(tag);
+				return json;
+			}catch(Exception e){
+				System.out.println(e);
+				return null;
+			}
 		}catch(Exception e){
-			System.out.println(e);
-			return null;
+			e.printStackTrace();
+			return "";
 		}
+	}
+	
+	public String parse(String file)throws FileNotFoundException{
+		FileInputStream fis = new FileInputStream(file);
+		return parse(fis);
 	}
 	
 	
@@ -73,8 +84,7 @@ public class TemplateEngine {
             
             Tag child = parseElement();
             context.setCurrentElement(el);         
-            tag.addChild(child);
-            System.out.println(element.getName());
+            tag.addChild(child);            
         }
         context.setCurrentElement(el);
         tag.endTag();

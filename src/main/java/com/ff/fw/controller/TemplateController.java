@@ -1,5 +1,7 @@
 package com.ff.fw.controller;
 
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ public class TemplateController {
 	
 	@RequestMapping(value = "/get/{templateId}", method = RequestMethod.GET)
 	public @ResponseBody String test(@PathVariable String templateId){
-		return null;
+		InputStream template = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/ff/fw/template/"+templateId+".xml");
+		return templateEngine.parse(template);
 	}
 }

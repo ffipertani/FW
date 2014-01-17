@@ -29,6 +29,9 @@ public class Tag {
 	}
  
  
+	public String render(){
+		return null;
+	}
 	
 	public void addChild(Tag child){
 		child.setParent(this);

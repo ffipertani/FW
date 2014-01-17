@@ -1,4 +1,4 @@
 <page title="Utenti" xmlns="http://com.ff.fw.ac">
-     <text label="Username" width="222"/>
-      <button label="Username" width="12"/>
+     <text value="Username" />
+     <button label="Username" width="12"/>
 </page>
