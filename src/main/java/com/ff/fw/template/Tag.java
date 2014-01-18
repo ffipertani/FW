@@ -14,7 +14,7 @@ public class Tag {
 	@JsonIgnore
 	private Tag parent;
 	private final List<Tag> children = new ArrayList<Tag>();
-	
+	private String textContent;
 	
 	public Tag(){
 		
@@ -27,12 +27,7 @@ public class Tag {
 	public void endTag(){
 		
 	}
- 
- 
-	public String render(){
-		return null;
-	}
-	
+ 	
 	public void addChild(Tag child){
 		child.setParent(this);
     	getChildren().add(child);
@@ -122,6 +117,14 @@ public class Tag {
 
 	public void setElement(Element element) {
 		this.element = element;
+	}
+
+	public String getTextContent() {
+		return textContent;
+	}
+
+	public void setTextContent(String textContent) {
+		this.textContent = textContent;
 	}
 	
 	

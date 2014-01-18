@@ -87,6 +87,8 @@ public class TemplateEngine {
             tag.addChild(child);            
         }
         context.setCurrentElement(el);
+        String text = el.getText();
+        tag.setTextContent(text);
         tag.endTag();
         return tag;
 	}

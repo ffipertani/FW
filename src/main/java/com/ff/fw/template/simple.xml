@@ -1,4 +1,16 @@
 <page title="Utenti" xmlns="http://com.ff.fw.ac">
+    <tabPanel>
+        <tab label="TAb1">
+             <text value="Username" />
+     <button label="Salva tutto" width="12"/>
+        </tab>
+        <tab label="TAb2">
+            <freeText>
+                Ciao mondo infame
+                
+            </freeText>
+        </tab>
+    </tabPanel>
      <text value="Username" />
-     <button label="Username" width="12"/>
+     <button label="Salva tutto" width="12"/>
 </page>

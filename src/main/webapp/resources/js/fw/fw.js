@@ -1,22 +1,21 @@
 ready(function(){
  
+	function bindWidget(widget){
+		var children = widget.getChildren();
+		
+		widget.bind();
+		
+		for(var i=0;i<children.length;i++){
+			var child = children[i];
+			bindWidget(child);
+		}
+	}
+	
 	function renderWidget(widget){
 		var out = new Array();
 		widget.render(out);
-		var children = widget.getChildren();
-		
-		 
-		for(var i=0;i<children.length;i++){
-			var child = children[i];
-			if(child==null){
-				return;
-			}
-			 
-			renderWidget(child);
-		}
-		
-		document.body.innerHtml = out;
-		console.log(out);
+		document.body.innerHTML = out.join("");
+		console.log(out.join(""));
 	}
 	
 	function createWidget(node){
@@ -33,7 +32,7 @@ ready(function(){
 			
 			eval("widget.set"+first+k.substring(1)+"(node[k])")
 		}
-		console.log(JSON.stringify(widget));
+		
 		
 		for(var i=0;i<children.length;i++){
 			var child = children[i];
@@ -48,6 +47,7 @@ ready(function(){
 		var jj = JSON.parse(resp);
 		var root = createWidget(jj);
 		renderWidget(root);
+		bindWidget(root);
 	});
 });
  
