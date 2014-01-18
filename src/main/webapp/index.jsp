@@ -35,10 +35,13 @@
 		<script src="/FW/resources/js/app/widget/Page.js"></script>
 		<script src="/FW/resources/js/app/widget/Text.js"></script>
 		<script src="/FW/resources/js/app/widget/Calendar.js"></script>
+		<script src="/FW/resources/js/app/widget/CheckBox.js"></script>
 		<script src="/FW/resources/js/app/widget/ComboBox.js"></script>
 		<script src="/FW/resources/js/app/widget/FreeText.js"></script>
 		<script src="/FW/resources/js/app/widget/Tab.js"></script>
 		<script src="/FW/resources/js/app/widget/TabPanel.js"></script>
+		<script src="/FW/resources/js/app/widget/Grid.js"></script>
+		<script src="/FW/resources/js/app/widget/Column.js"></script>
 		
 		
 		<script src="/FW/resources/js/app/myapp.js"></script>

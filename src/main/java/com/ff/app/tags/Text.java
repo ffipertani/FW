@@ -1,8 +1,7 @@
 package com.ff.app.tags;
 
-import com.ff.fw.template.Tag;
 
-public class Text extends Tag {
+public class Text extends FormTag {
 	private String value;
 
 	public String getValue() {

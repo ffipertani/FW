@@ -7,11 +7,11 @@ var Text = FormWidget.$extend({
   
   
   bind: function(){
-	  $("#"+this.uuid).jqxInput({placeHolder: "Enter a Country"});  
+	  $("#"+this.uuid).jqxInput();  
   },
   
   render : function(out) {
-    out.push('<input id="'+this.uuid+'" type="text" />');
+    out.push('<div>'+this.label+'<input id="'+this.uuid+'" type="text" value="'+this.value+'"/></div>');
   },
 
   remove : function() {
