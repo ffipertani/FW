@@ -19,7 +19,7 @@ public class TemplateController {
 	
 	@RequestMapping(value = "/get/{templateId}", method = RequestMethod.GET)
 	public @ResponseBody String test(@PathVariable String templateId){
-		InputStream template = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/ff/fw/template/"+templateId+".xml");
+		InputStream template = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/ff/app/view/"+templateId+".xml");
 		return templateEngine.parse(template);
 	}
 }

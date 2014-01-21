@@ -25,9 +25,17 @@
 		<script src="/FW/resources/js/fw/fw.js"></script>
 		 -->
 		
+		<!-- APPLICATION INCLUDES -->
+		
+		 
+		<script src="/FW/resources/js/app/lib/ext/ext-all.js"></script>
+		
 		<script src="/FW/resources/js/app/lib/jquery.js"></script>
 		<script src="/FW/resources/js/app/lib/jqwidgets/jqx-all.js"></script>
 		
+		<link rel="stylesheet" href="/FW/resources/js/app/lib/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/FW/resources/js/app/lib/bootstrap/css/bootstrap-theme.min.css">
+		<script src="/FW/resources/js/app/lib/bootstrap/js/bootstrap.min.js"></script>
 		
 		<script src="/FW/resources/js/app/widget/BaseWidget.js"></script>
 		<script src="/FW/resources/js/app/widget/FormWidget.js"></script>
@@ -42,6 +50,49 @@
 		<script src="/FW/resources/js/app/widget/TabPanel.js"></script>
 		<script src="/FW/resources/js/app/widget/Grid.js"></script>
 		<script src="/FW/resources/js/app/widget/Column.js"></script>
+		
+		
+		<!-- Jq Widgets -->		
+		<script src="/FW/resources/js/app/widget/jq/Button.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/Page.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/Text.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/Calendar.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/CheckBox.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/ComboBox.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/FreeText.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/Tab.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/TabPanel.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/Grid.js"></script>
+		<script src="/FW/resources/js/app/widget/jq/Column.js"></script>
+		
+		
+		<!-- Bootstrap -->		
+		<script src="/FW/resources/js/app/widget/bs/Button.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/Page.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/Text.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/Calendar.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/CheckBox.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/ComboBox.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/FreeText.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/Tab.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/TabPanel.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/Grid.js"></script>
+		<script src="/FW/resources/js/app/widget/bs/Column.js"></script>
+		
+		
+		
+		<!-- Ext Js -->		
+		<script src="/FW/resources/js/app/widget/ext/Button.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/Page.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/Text.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/Calendar.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/CheckBox.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/ComboBox.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/FreeText.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/Tab.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/TabPanel.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/Grid.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/Column.js"></script>
 		
 		
 		<script src="/FW/resources/js/app/myapp.js"></script>

@@ -22,19 +22,47 @@ import com.ff.fw.template.TagRegistry;
 public class ApplicationNameSpaceRegistry extends NamespaceRegistry{
 
 	public ApplicationNameSpaceRegistry(){
-		TagRegistry ac = new TagRegistry();
-		ac.register("button", "Button", Button.class);
-		ac.register("page",  "Page", Page.class);
-		ac.register("text", "Text", Text.class);
-		ac.register("tabPanel", "TabPanel", TabPanel.class);
-		ac.register("tab", "Tab", Tab.class);
-		ac.register("calendar", "Calendar", Calendar.class);
-		ac.register("comboBox", "ComboBox", ComboBox.class);
-		ac.register("freeText", "FreeText", FreeText.class);
-		ac.register("checkBox", "CheckBox", CheckBox.class);
-		ac.register("grid", "Grid", Grid.class);
-		ac.register("column", "Column", Column.class);
+		TagRegistry jq = new TagRegistry();
+		jq.register("button", "JQButton", Button.class);
+		jq.register("page",  "JQPage", Page.class);
+		jq.register("text", "JQText", Text.class);
+		jq.register("tabPanel", "JQTabPanel", TabPanel.class);
+		jq.register("tab", "JQTab", Tab.class);
+		jq.register("calendar", "JQCalendar", Calendar.class);
+		jq.register("comboBox", "JQComboBox", ComboBox.class);
+		jq.register("freeText", "JQFreeText", FreeText.class);
+		jq.register("checkBox", "JQCheckBox", CheckBox.class);
+		jq.register("grid", "JQGrid", Grid.class);
+		jq.register("column", "JQColumn", Column.class);
 		
-		register("http://com.ff.fw.ac",ac);
+		TagRegistry bs = new TagRegistry();
+		jq.register("button", "BSButton", Button.class);
+		jq.register("page",  "BSPage", Page.class);
+		jq.register("text", "BSText", Text.class);
+		jq.register("tabPanel", "BSTabPanel", TabPanel.class);
+		jq.register("tab", "BSTab", Tab.class);
+		jq.register("calendar", "BSCalendar", Calendar.class);
+		jq.register("comboBox", "BSComboBox", ComboBox.class);
+		jq.register("freeText", "BSFreeText", FreeText.class);
+		jq.register("checkBox", "BSCheckBox", CheckBox.class);
+		jq.register("grid", "BSGrid", Grid.class);
+		jq.register("column", "BSColumn", Column.class);
+		
+		TagRegistry ext = new TagRegistry();
+		ext.register("button", "ExtButton", Button.class);
+		ext.register("page",  "ExtPage", Page.class);
+		ext.register("text", "ExtText", Text.class);
+		ext.register("tabPanel", "ExtTabPanel", TabPanel.class);
+		ext.register("tab", "ExtTab", Tab.class);
+		ext.register("calendar", "ExtCalendar", Calendar.class);
+		ext.register("comboBox", "ExtComboBox", ComboBox.class);
+		ext.register("freeText", "ExtFreeText", FreeText.class);
+		ext.register("checkBox", "ExtCheckBox", CheckBox.class);
+		ext.register("grid", "ExtGrid", Grid.class);
+		ext.register("column", "ExtColumn", Column.class);
+		
+		register("http://com.ff.fw.jq",jq);
+		register("http://com.ff.fw.bs",bs);
+		register("http://com.ff.fw.ext",ext);
 	}
 }

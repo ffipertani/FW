@@ -1,0 +1,26 @@
+<page title="Utenti" xmlns="http://com.ff.fw.ext">
+    <grid>
+        <column label="Nome" field="firstname"/>
+        <column label="Cognome" field="lastname"/>
+        <column label="Prodotto" field="product"/>
+        <column label="Prezzo" field="price"/>
+        <column label="Quantita'" field="quantity"/>
+        <column label="Totale" field="total"/>
+    </grid>
+    <tabPanel>
+       	 <tab label="Gruppi">
+            <text label="Username" value="un testo" />
+     		 
+     		<checkBox label="Val1" />
+        </tab>
+        <tab label="Profili">
+            
+            <freeText>
+                Ciao mondo infame
+                
+            </freeText>
+        </tab>
+    </tabPanel>
+      
+     <button label="Salva tutto" width="12"/>
+</page>

@@ -17,17 +17,6 @@ var Column = BaseWidget.$extend({
   
   getField : function(){
 	  return this.field;
-  },
-  
-  bind:function(){
-	 
-  },
-  
-  render : function(out) {
-    
-  },
-
-  remove : function() {
-    
   }
+  
 });

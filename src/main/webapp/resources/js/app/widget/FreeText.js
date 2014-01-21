@@ -5,17 +5,7 @@ var FreeText = BaseWidget.$extend({
 
   setContent : function(content){
 	  this.content = content;
-  },
-  
-  bind:function(){
-	  
-  },
-  
-  render : function(out) {
-    out.push('<p>'+this.textContent+'</p>');
-  },
-
-  remove : function() {
-    
   }
+  
+  
 });

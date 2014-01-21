@@ -1,4 +1,4 @@
-<page title="Utenti" xmlns="http://com.ff.fw.ac">
+<page title="Utenti" xmlns="http://com.ff.fw.jq">
     <grid>
         <column label="Nome" field="firstname"/>
         <column label="Cognome" field="lastname"/>
