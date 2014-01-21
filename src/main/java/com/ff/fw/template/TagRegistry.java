@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TagRegistry {
-	private static Map<String, Class<? extends Tag>> registry = new HashMap<String, Class<? extends Tag>>();
-	private static Map<String, String> names = new HashMap<String, String>();
+	private  Map<String, Class<? extends Tag>> registry = new HashMap<String, Class<? extends Tag>>();
+	private  Map<String, String> names = new HashMap<String, String>();
 
 	public void register(String name, String jsName, Class<? extends Tag> tag) {
 		registry.put(name, tag);

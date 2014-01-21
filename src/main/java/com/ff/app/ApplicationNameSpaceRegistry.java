@@ -36,17 +36,17 @@ public class ApplicationNameSpaceRegistry extends NamespaceRegistry{
 		jq.register("column", "JQColumn", Column.class);
 		
 		TagRegistry bs = new TagRegistry();
-		jq.register("button", "BSButton", Button.class);
-		jq.register("page",  "BSPage", Page.class);
-		jq.register("text", "BSText", Text.class);
-		jq.register("tabPanel", "BSTabPanel", TabPanel.class);
-		jq.register("tab", "BSTab", Tab.class);
-		jq.register("calendar", "BSCalendar", Calendar.class);
-		jq.register("comboBox", "BSComboBox", ComboBox.class);
-		jq.register("freeText", "BSFreeText", FreeText.class);
-		jq.register("checkBox", "BSCheckBox", CheckBox.class);
-		jq.register("grid", "BSGrid", Grid.class);
-		jq.register("column", "BSColumn", Column.class);
+		bs.register("button", "BSButton", Button.class);
+		bs.register("page",  "BSPage", Page.class);
+		bs.register("text", "BSText", Text.class);
+		bs.register("tabPanel", "BSTabPanel", TabPanel.class);
+		bs.register("tab", "BSTab", Tab.class);
+		bs.register("calendar", "BSCalendar", Calendar.class);
+		bs.register("comboBox", "BSComboBox", ComboBox.class);
+		bs.register("freeText", "BSFreeText", FreeText.class);
+		bs.register("checkBox", "BSCheckBox", CheckBox.class);
+		bs.register("grid", "BSGrid", Grid.class);
+		bs.register("column", "BSColumn", Column.class);
 		
 		TagRegistry ext = new TagRegistry();
 		ext.register("button", "ExtButton", Button.class);
