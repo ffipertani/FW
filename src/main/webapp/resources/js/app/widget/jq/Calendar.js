@@ -1,7 +1,5 @@
-var JQCalendar = Calendar.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var JQCalendar = fw.create([Calendar],{
+  
 
   bind:function(){	   
 	  $("#"+this.uuid).jqxDateTimeInput({width: 220, height: 220});

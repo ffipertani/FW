@@ -2,27 +2,33 @@ package com.ff.app;
 
 
 
-import org.springframework.stereotype.Component;
-
 import com.ff.app.tags.Button;
 import com.ff.app.tags.Calendar;
 import com.ff.app.tags.CheckBox;
 import com.ff.app.tags.Column;
 import com.ff.app.tags.ComboBox;
+import com.ff.app.tags.Controller;
+import com.ff.app.tags.Form;
 import com.ff.app.tags.FreeText;
 import com.ff.app.tags.Grid;
 import com.ff.app.tags.Page;
+import com.ff.app.tags.Script;
 import com.ff.app.tags.Tab;
 import com.ff.app.tags.TabPanel;
 import com.ff.app.tags.Text;
+import com.ff.app.tags.Toolbar;
+import com.ff.app.tags.Window;
 import com.ff.fw.template.NamespaceRegistry;
 import com.ff.fw.template.TagRegistry;
 
-@Component
+//@Component
 public class ApplicationNameSpaceRegistry extends NamespaceRegistry{
 
 	public ApplicationNameSpaceRegistry(){
 		TagRegistry jq = new TagRegistry();
+		jq.register("controller", "Controller", Controller.class);
+		jq.register("form", "JQForm", Form.class);
+		jq.register("script", "Script", Script.class);
 		jq.register("button", "JQButton", Button.class);
 		jq.register("page",  "JQPage", Page.class);
 		jq.register("text", "JQText", Text.class);
@@ -36,6 +42,8 @@ public class ApplicationNameSpaceRegistry extends NamespaceRegistry{
 		jq.register("column", "JQColumn", Column.class);
 		
 		TagRegistry bs = new TagRegistry();
+		bs.register("controller", "Controller", Controller.class);
+		bs.register("script", "Script", Script.class);
 		bs.register("button", "BSButton", Button.class);
 		bs.register("page",  "BSPage", Page.class);
 		bs.register("text", "BSText", Text.class);
@@ -49,17 +57,22 @@ public class ApplicationNameSpaceRegistry extends NamespaceRegistry{
 		bs.register("column", "BSColumn", Column.class);
 		
 		TagRegistry ext = new TagRegistry();
+		ext.register("window", "ExtWindow", Window.class);
+		ext.register("controller", "Controller", Controller.class);
+		ext.register("form", "ExtForm", Form.class);
+		ext.register("script", "Script", Script.class);
 		ext.register("button", "ExtButton", Button.class);
 		ext.register("page",  "ExtPage", Page.class);
 		ext.register("text", "ExtText", Text.class);
 		ext.register("tabPanel", "ExtTabPanel", TabPanel.class);
 		ext.register("tab", "ExtTab", Tab.class);
-		ext.register("calendar", "ExtCalendar", Calendar.class);
+		ext.register("calendar", "ExtCalendar", Calendar.class);		
 		ext.register("comboBox", "ExtComboBox", ComboBox.class);
 		ext.register("freeText", "ExtFreeText", FreeText.class);
 		ext.register("checkBox", "ExtCheckBox", CheckBox.class);
 		ext.register("grid", "ExtGrid", Grid.class);
 		ext.register("column", "ExtColumn", Column.class);
+		ext.register("toolbar", "ExtToolbar", Toolbar.class);
 		
 		register("http://com.ff.fw.jq",jq);
 		register("http://com.ff.fw.bs",bs);

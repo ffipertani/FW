@@ -1,4 +1,4 @@
-<page title="Utenti" xmlns="http://com.ff.fw.bs">
+<page title="Utenti" xmlns="http://com.ff.fw.bs" xmlns:jq="http://com.ff.fw.jq">
     <grid>
         <column label="Nome" field="firstname"/>
         <column label="Cognome" field="lastname"/>
@@ -22,5 +22,5 @@
         </tab>
     </tabPanel>
       
-     <button label="Salva tutto" width="12"/>
+     <jq:button label="Salva tutto" width="12"/>
 </page>

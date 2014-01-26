@@ -1,20 +1,26 @@
-var ExtPage = Page.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var ExtPage = fw.create([Page,ExtBaseWidget],{
 
   bind:function(){
-	  Ext.create('Ext.panel.Panel', {
+		
+	var renderTo = this.uuid;
+	if(this.rendered==null){
+		renderTo=null;
+	}
+	var items = this.createItems();
+	 this.ext = Ext.create('Ext.panel.Panel', {
 		    title: this.title,
-		    width: 200,		   
-		    renderTo:this.uuid
+		  items:items,
+		    width: 1200,		   
+		    height:1200,		    
+		    renderTo:renderTo
 	  });
-  
+	 
+	 
   },
   
-  render : function(out) {
-	  
-    out.push('<div id="'+this.uuid+'" >');
+  render : function(out) {	  
+	  this.rendered = true;
+    out.push('<div id="'+this.uuid+'" style="margin:50px;">');
    
     this.renderChildren(out);
      
@@ -24,4 +30,6 @@ var ExtPage = Page.$extend({
   remove : function() {
     
   }
+  
+  
 });

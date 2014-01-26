@@ -1,8 +1,5 @@
-var BSTab = Tab.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
+var BSTab = fw.create([Tab],{
+  
   bind:function(){	   
 	  
 	  

@@ -1,8 +1,5 @@
-var BSButton = Button.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
+var BSButton = fw.create([Button],{
+  
   bind:function(){
 	 
   },

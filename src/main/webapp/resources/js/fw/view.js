@@ -1,29 +1,62 @@
-function View(id){
-	this.id = id;
+function View(url,listener){
+	this.url = url;
 	this.root = null;
+	this.listener = listener;
 	
 	this.getRoot = function(){
 		return this.root;
-	}
+	};
 	
-	this.renderView = function(name){
-		var view = this;
-		//ajax("http://localhost:8080/FW/template/get/simple.xml").done(function(resp){
-		ajax(name).done(function(resp){
-			console.log(resp);
+	this.create = function(render){
+		console.log("creating view " + this.url + " render " + render);
+		var view = this;	
+		ajax(this.url).done(function(resp){
+			//console.log(resp);
+			try{
 			var jj = JSON.parse(resp);
 			var root = view.createWidget(jj);
+			
 			view.root = root;
-			view.renderWidget(root);
-			view.bindWidget(root);
+			if(render==true){				
+				view.renderWidget(root);
+			}
+			view.bindWidget(root);			
+			view.renderCompleted(root);
+			
+			if(view.listener!=null){
+				view.listener(root);
+			}
+			}catch(err){
+				console.error(err);
+				//alert("Errore durante la creazione della view." + err);
+			}
 		});
-	}
+		 
+	};
 	
+	this.renderTo = function(id){		
+		this.id = id;
+		this.create(true); 
+	};
+	
+	this.renderCompleted = function(widget){
+		var children = widget.getChildren();
+		
+		
+		for(var i=0;i<children.length;i++){
+			var child = children[i];			
+			this.renderCompleted(child);
+		}
+		
+		widget.renderCompleted();
+		
+	}
 	
 	this.bindWidget = function(widget){
 		var children = widget.getChildren();
 		
 		widget.bind();
+		widget.binded = true;
 		
 		for(var i=0;i<children.length;i++){
 			var child = children[i];
@@ -31,34 +64,30 @@ function View(id){
 		}
 	}
 	
-	this.renderWidget = function(widget){
+	this.renderWidget = function(widget){		 
 		var out = new Array();
 		widget.render(out);
-		console.log(this.id);
 		document.getElementById(this.id).innerHTML = out.join("");
-		console.log(out.join(""));
 	}
 	
 	this.createWidget = function(node){
 		console.log("render node " + node.jsName);
 		var name = node.jsName;
 		var children = node.children;
-		
-		var widget = eval("new "+name+"(name);");
+		var config = new Object();
 		for(var k in node){
-			if(k=="jsName"||k=="children"){
+			if(k=="children"){
 				continue;
 			}
-			var first = k[0].toUpperCase();
-			
-			eval("widget.set"+first+k.substring(1)+"(node[k])")
+			config[k] = node[k];
 		}
-		
+		var widget = eval("new "+name+"(config);");
 		
 		for(var i=0;i<children.length;i++){
 			var child = children[i];
 			var childWidget = this.createWidget(child);
-			widget.getChildren().push(childWidget);
+			
+			widget.getChildren().push(childWidget);			
 		}
 		return widget;
 	}

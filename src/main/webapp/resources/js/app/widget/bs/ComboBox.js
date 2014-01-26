@@ -1,10 +1,5 @@
-var BSComboBox = ComboBox.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
-  
-  
+var BSComboBox = fw.create([ComboBox],{
+    
   bind:function(){	   
 	  
   },

@@ -1,12 +1,8 @@
-var JQComboBox = ComboBox.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
-  
+var JQComboBox = fw.create([ComboBox],{
+    
   
   bind:function(){	   
-	  $("#"+this.uuid).jqxComboBox({ width: '250', height: '25px'});
+	  $("#"+this.uuid).jqxComboBox();
   },
   
   render : function(out) {

@@ -1,7 +1,4 @@
-var JQButton = Button.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var JQButton = fw.create([Button],{
 
   bind:function(){
 	  console.log("binding button");

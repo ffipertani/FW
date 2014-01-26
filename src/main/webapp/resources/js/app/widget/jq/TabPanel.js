@@ -1,7 +1,4 @@
-var JQTabPanel = TabPanel.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var JQTabPanel = fw.create([TabPanel],{
   
   bind:function(){	  
 	  $("#"+this.uuid).jqxTabs({width: '90%', height: 220});

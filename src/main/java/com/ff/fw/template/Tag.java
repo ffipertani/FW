@@ -8,13 +8,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.dom4j.Element;
 
 public class Tag {
-	@JsonIgnore
-	private Element element;
 	private String jsName;
 	@JsonIgnore
 	private Tag parent;
 	private final List<Tag> children = new ArrayList<Tag>();
-	private String textContent;
+	 
 	
 	public Tag(){
 		
@@ -34,6 +32,7 @@ public class Tag {
 	}
 	
 	public void addAttribute(String name, String text){
+		boolean found = false;
 		String setter = getSetterName(name);
 		Method[] ms = getClass().getMethods();
         for(Method m:ms){
@@ -41,36 +40,54 @@ public class Tag {
         		if(m.getParameterTypes().length>1){
         			continue;
         		}
-        		if(String.class.isAssignableFrom(m.getParameterTypes()[0])){
+        		if(m.getParameterTypes()[0].isAssignableFrom(String.class)){
         			invokeSetter(m,text);
+        			found = true;
+        			break;
         		}
-        		if(Integer.class.isAssignableFrom(m.getParameterTypes()[0]) || int.class.isAssignableFrom(m.getParameterTypes()[0])){
+        		if(m.getParameterTypes()[0].isAssignableFrom(Integer.class) || m.getParameterTypes()[0].isAssignableFrom(int.class)){
         			Integer num=null;
         			try{
         			 num = Integer.parseInt(text);        			
-        			}catch(Exception e){}
-        			invokeSetter(m,num);        			
+        			}catch(Exception e){
+        				System.err.println(e);
+        			}
+        			invokeSetter(m,num); 
+        			found = true;
+        			break;
         		}
-        		if(Boolean.class.isAssignableFrom(m.getParameterTypes()[0]) || boolean.class.isAssignableFrom(m.getParameterTypes()[0])){
+        		if(m.getParameterTypes()[0].isAssignableFrom(Boolean.class) || m.getParameterTypes()[0].isAssignableFrom(boolean.class)){
         			Boolean bool=null;
         			try{
         			 bool = Boolean.parseBoolean(text);        			
-        			}catch(Exception e){}
-        			invokeSetter(m,bool);        			
+        			}catch(Exception e){
+        				System.err.println(e);
+        			}
+        			invokeSetter(m,bool);      
+        			found = true;
+        			break;
         		}
-        		if(Double.class.isAssignableFrom(m.getParameterTypes()[0]) || double.class.isAssignableFrom(m.getParameterTypes()[0])){
+        		if(m.getParameterTypes()[0].isAssignableFrom(Double.class) || m.getParameterTypes()[0].isAssignableFrom(double.class)){
         			Double bool=null;
         			try{
         			 bool = Double.parseDouble(text);        			
-        			}catch(Exception e){}
-        			invokeSetter(m,bool);        			
+        			}catch(Exception e){
+        				System.err.println(e);
+        			}
+        			invokeSetter(m,bool);   
+        			found = true;
+        			break;
         		}
         	}
+        	
         }
+        if(!found){
+    		throw new RuntimeException("Attenzione attributo " + name + " non trovato per il tag " +getClass());
+    	}
 	}
 	
 	private void invokeSetter(Method m,Object arg){
-		try{
+		try{			
 			m.invoke(this, arg);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -111,21 +128,5 @@ public class Tag {
 		return children;
 	}
 
-	public Element getElement() {
-		return element;
-	}
-
-	public void setElement(Element element) {
-		this.element = element;
-	}
-
-	public String getTextContent() {
-		return textContent;
-	}
-
-	public void setTextContent(String textContent) {
-		this.textContent = textContent;
-	}
-	
 	
 }

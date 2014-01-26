@@ -1,24 +1,18 @@
-var ExtButton = Button.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var ExtButton = fw.create([Button,ExtBaseWidget],{
 
-  bind:function(){
-	  Ext.create('Ext.Button', {
+  createExt:function(){
+	  var wgt = this;
+	 return  this.createInstance('Ext.Button', {
 		    text: this.label,
-		    renderTo: this.uuid,        
+		    //height:this.height, 
+		    width:this.width,
 		    handler: function() {
-		        alert('You clicked the button!')
+		        for(var i=0;i<wgt.clickListeners.length;i++){
+		        	var listener = wgt.clickListeners[i];
+		        	listener();
+		        }
 		    }
 		});
 
-  },
-  
-  render : function(out) {
-    out.push('<div id="'+this.uuid+'" ></div>');
-  },
-
-  remove : function() {
-    
-  }
+  } 
 });

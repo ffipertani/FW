@@ -1,12 +1,17 @@
-<page title="Utenti" xmlns="http://com.ff.fw.jq">
-    <grid>
-        <column label="Nome" field="firstname"/>
-        <column label="Cognome" field="lastname"/>
-        <column label="Prodotto" field="product"/>
-        <column label="Prezzo" field="price"/>
-        <column label="Quantita'" field="quantity"/>
-        <column label="Totale" field="total"/>
+<page id="mypage" title="Gestione Utenti" xmlns="http://com.ff.fw.jq">
+   
+    <grid id="mygrid" >
+        <column label="Nome" field="firstName"/>
+        <column label="Cognome" field="lastName"/>
+        <column label="Username" field="username"/>
+        <column label="Gender" field="gender"/>        
     </grid>
+    <form>
+    	<text label="Username" field="username" />
+    	<text label="Cognome" field="lastName" />
+    	<text label="Nome" field="firstName" />
+    	<comboBox label="Gender" field="gender"/>  
+    </form>
     <tabPanel>
        	 <tab label="Gruppi">
             <text label="Username" value="un testo" />
@@ -17,10 +22,20 @@
             
             <freeText>
                 Ciao mondo infame
-                
             </freeText>
         </tab>
     </tabPanel>
       
      <button label="Salva tutto" width="12"/>
+     
+     <script>
+      
+        var userService = new UserService();
+        userService.search().done(function(resp){
+			console.log(resp);
+			var users = JSON.parse(resp);
+			mygrid.setData(users);
+		}); 
+         
+     </script>
 </page>

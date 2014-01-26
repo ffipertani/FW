@@ -1,26 +1,17 @@
-var ExtText = Text.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var ExtText = fw.create([Text,ExtBaseWidget],{
 
-   
-  
-  
-  bind: function(){
-	  Ext.create('Ext.form.field.Text', {
-		  name: 'name',
-	        fieldLabel: 'Name',
-	        allowBlank: false,  // requires a non-empty value
-		    renderTo: this.uuid		   
+  createExt: function(){
+	  return this.createInstance('Ext.form.field.Text', {
+		    name: this.field,
+	        fieldLabel: this.label,
+	        allowBlank: false, 
+		       
 		});
 
   },
-  
-  render : function(out) {
-    out.push('<div id="'+this.uuid+'"></div>');
-  },
 
-  remove : function() {
-    
+  changeValue:function(value){
+	  this.ext.setValue(value);
   }
+   
 });

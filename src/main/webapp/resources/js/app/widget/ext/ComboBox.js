@@ -1,38 +1,32 @@
-var ExtComboBox = ComboBox.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var ExtComboBox = fw.create([ComboBox,ExtBaseWidget],{
 
   
   
-  bind:function(){	   
-	  var states = Ext.create('Ext.data.Store', {
-		    fields: ['abbr', 'name'],
-		    data : [
-		        {"abbr":"AL", "name":"Alabama"},
-		        {"abbr":"AK", "name":"Alaska"},
-		        {"abbr":"AZ", "name":"Arizona"}
-		        //...
-		    ]
+  createExt:function(){	   
+	  this.store = Ext.create('Ext.data.Store', {
+		    fields: [this.displayField, this.valueField],
+		    data : []
 		});
 
-		// Create the combo box, attached to the states data store
-		Ext.create('Ext.form.ComboBox', {
+		 
+		return this.createInstance('Ext.form.ComboBox', {
 		    fieldLabel: this.label,
-		    store: states,
+		    store: this.store,
 		    queryMode: 'local',
-		    displayField: 'name',
-		    valueField: 'abbr',
-		    renderTo: this.uuid
+		    displayField: this.displayField,
+		    valueField: this.valueField,		    
 		});
 
   },
   
-  render : function(out) {
-    out.push('<div id="'+this.uuid+'"></div>');
+  changeValue:function(value){
+	  this.ext.setValue(value);
   },
-
-  remove : function() {
-    
+  
+  setData:function(data){
+	  this.store.loadData(data,false);
+	  
   }
+  
+   
 });

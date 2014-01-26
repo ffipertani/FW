@@ -1,0 +1,25 @@
+<page id="mypage" title="Popup" xmlns="http://com.ff.fw.ext">
+    
+    <controller id="userController" autoSearch="true" />
+    
+    <grid id="mygrid" controller="userController">
+        <toolbar>
+            <button label="Filtra"/>
+        </toolbar>
+        <column label="Nome" field="firstName"/>
+        <column label="Cognome" field="lastName" autoSize="true"/>
+        <column label="Username" field="username"/>
+        <column label="Sesso" field="gender"/>       
+        <column label="Codice fiscale" field="personalCode"/>
+        <column label="Data nascita" field="birthDate"/> 
+    </grid>
+     
+     <script>
+      <![CDATA[ 
+      var userService = new UserService();           
+      userController.doSearch=function(){
+      	 return userService.search();
+      }     
+      ]]>
+     </script>
+</page>

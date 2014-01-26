@@ -1,4 +1,4 @@
-<page title="Utenti" xmlns="http://com.ff.fw.ac">
+<page title="Utenti" xmlns="http://com.ff.fw.ac" xmlns:ru="http://com.ff.fw.ru">
     <controller id="userController">
     	<controller id="groupController" pageSize="5"/>
     </controller>

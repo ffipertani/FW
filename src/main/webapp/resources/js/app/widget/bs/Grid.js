@@ -1,6 +1,6 @@
-var BSGrid = Grid.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
+var BSGrid = fw.create([Grid],{
+  constructor : function(config) {	 
+	  this.$super(config);
 	  this.initData();
   },
 

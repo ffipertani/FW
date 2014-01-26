@@ -1,8 +1,5 @@
-var JQTab = Tab.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
+var JQTab = fw.create([Tab],{
+  
   bind:function(){	   
 	  
   },

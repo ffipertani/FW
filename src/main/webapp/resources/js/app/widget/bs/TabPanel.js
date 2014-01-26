@@ -1,7 +1,4 @@
-var BSTabPanel = TabPanel.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var BSTabPanel = fw.create([TabPanel],{
   
   bind:function(){	  
 	  

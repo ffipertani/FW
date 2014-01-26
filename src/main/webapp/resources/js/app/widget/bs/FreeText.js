@@ -1,11 +1,5 @@
-var BSFreeText = FreeText.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
-  setContent : function(content){
-	  this.content = content;
-  },
+var BSFreeText = fw.create([FreeText],{
+  
   
   bind:function(){
 	  

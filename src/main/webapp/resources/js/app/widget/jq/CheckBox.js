@@ -1,8 +1,5 @@
-var JQCheckBox = CheckBox.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
+var JQCheckBox = fw.create([CheckBox],{
+  
   bind:function(){	   
 	  $("#"+this.uuid).jqxCheckBox({width: 220, height: 220});
   },

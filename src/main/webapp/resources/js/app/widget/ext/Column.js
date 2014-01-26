@@ -1,17 +1,9 @@
-var ExtColumn = Column.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
- 
-  bind:function(){
-	 
-  },
-  
-  render : function(out) {
-    
-  },
+var ExtColumn = fw.create([Column,ExtBaseWidget],{
 
-  remove : function() {
-    
-  }
+	createExt:function(){
+		return{
+			header: this.label,  dataIndex: this.field, autoSizeColumn:this.autoSize
+		};
+	}
+  
 });

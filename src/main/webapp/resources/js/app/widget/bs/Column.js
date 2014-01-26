@@ -1,8 +1,5 @@
-var BSColumn = Column.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
- 
+var BSColumn = fw.create([Column],{
+  
   bind:function(){
 	 
   },

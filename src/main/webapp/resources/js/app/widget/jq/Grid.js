@@ -1,12 +1,8 @@
-var JQGrid = Grid.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
-  
+var JQGrid = fw.create([Grid],{
+    
   bind:function(){
 	  var data = {};
-	  
+	  /*
 	  var firstNames =
           [
               "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
@@ -44,56 +40,63 @@ var JQGrid = Grid.$extend({
           }
           
           
-	  var source =
-      {
-		  localdata: data,
-          datatype: "local",
-          datafields: [
-              { name: 'firstname', type: 'string' },
-              { name: 'lastname', type: 'string' },
-              { name: 'productname', type: 'string' },
-              { name: 'price', type: 'float' },
-              { name: 'quantity', type: 'int' },
-              { name: 'total', type: 'float' }
-          ] 
-      };
+	
+	   */
 	  
-	   var dataAdapter = new $.jqx.dataAdapter(source, {
-           downloadComplete: function (data, status, xhr) {},
-           loadComplete: function (data) {},
-           loadError: function (xhr, status, error) { }
-       });
-	   
+	
 	  
-	  var columns = new Array();
+	  this.columns = new Array();
+	  this.fields = new Array();
 	  
 	  var children = this.getChildren();
-		
 	  for(var i=0;i<children.length;i++){
 			 var child = children[i];	
 			 var column = new Object();
 			 column.text = child.getLabel();
 			 column.datafield = child.getField();
-			 columns.push(column);
-			 
+			 this.columns.push(column);
+			 this.fields.push({"name":column.datafield, "type":"string"});
+			
 	  }
+	 
+	  this.source =
+      {
+		  localdata: data,
+          datatype: "local",
+          datafields: this.fields
+      };
+	  
+	 
+	  
+	  this.initialConfig =  {
+              width: 670,                           
+              pageable: true,
+              autoheight: false,
+              sortable: true,
+              altrows: true,
+              enabletooltips: true,
+              editable: false,
+              //selectionmode: 'multiplecellsadvanced',
+              columns: this.columns
+              
+          };
 	  
 	  
-	  $("#"+this.uuid).jqxGrid(
-	            {
-	                width: 670,
-	                source: dataAdapter,                
-	                pageable: true,
-	                autoheight: true,
-	                sortable: true,
-	                altrows: true,
-	                enabletooltips: true,
-	                editable: true,
-	                selectionmode: 'multiplecellsadvanced',
-	                columns: columns
-	                
-	            });
+	  this.setData([]);
+	           
 	  
+  },
+  
+  
+  setData:function(data){	  
+	  this.source.localdata = data;
+	  this.dataAdapter = new $.jqx.dataAdapter(this.source, {
+          downloadComplete: function (data, status, xhr) {},
+          loadComplete: function (data) {},
+          loadError: function (xhr, status, error) { }
+      });
+	  this.initialConfig.source = this.dataAdapter;
+	  $("#"+this.uuid).jqxGrid(this.initialConfig);
   },
   
   render : function(out) {

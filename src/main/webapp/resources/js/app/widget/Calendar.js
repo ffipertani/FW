@@ -1,5 +1,3 @@
-var Calendar = FormWidget.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var Calendar = fw.create([FormWidget],{
+  
 });

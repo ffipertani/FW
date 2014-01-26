@@ -1,7 +1,4 @@
-var BSCheckBox = CheckBox.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var BSCheckBox = fw.create([CheckBox],{
 
   bind:function(){	   
 	  

@@ -1,7 +1,5 @@
-var BSPage = Page.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var BSPage = fw.create([Page],{
+
 
   render : function(out) {
 	  

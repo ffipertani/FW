@@ -1,7 +1,4 @@
-var Tab = Widget.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var Tab = fw.create([BaseWidget],{
   
   setLabel:function(label){
 	  this.label = label;

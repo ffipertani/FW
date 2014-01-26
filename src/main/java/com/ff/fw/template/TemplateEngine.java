@@ -3,9 +3,11 @@ package com.ff.fw.template;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -18,21 +20,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class TemplateEngine {
 	private static ObjectMapper mapper = new ObjectMapper();
-	
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	static{
+		
+		//mapper.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+		mapper.setDateFormat(sdf);
+	}
 	@Autowired NamespaceRegistry namespaceRegistry;
 	
 	public String parse(InputStream inputStream){
 		try{
 			SAXReader reader = new SAXReader();
+			
 	        Document document = reader.read(inputStream);
 	        Element root = document.getRootElement();
 	        TemplateContext context = new TemplateContext();
-	        context.setCurrentElement(root);
+	        context.setElement(root);
 	        context.setDocRoot(root);
 	        TemplateContext.set(context);
 	        Tag tag = parseElement();
 	        TemplateContext.remove();
-	        try{
+	        try{	        	
 				String json =  mapper.writeValueAsString(tag);
 				return json;
 			}catch(Exception e){
@@ -45,6 +53,11 @@ public class TemplateEngine {
 		}
 	}
 	
+	static String convertStreamToString(java.io.InputStream is) {
+	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+	    return s.hasNext() ? s.next() : "";
+	}
+	
 	public String parse(String file)throws FileNotFoundException{
 		FileInputStream fis = new FileInputStream(file);
 		return parse(fis);
@@ -53,10 +66,9 @@ public class TemplateEngine {
 	
 	private Tag parseElement(){
 		TemplateContext context = TemplateContext.getInstance();
-		Element el = context.getCurrentElement();
-		String namespace = el.getNamespaceURI(); // TODO Da risolvere in base al prefisso del tag
-		
-		
+		Element el = context.getElement();
+		String namespace = el.getNamespaceURI(); 
+			
 		String name = el.getName();
 		TagRegistry registry = namespaceRegistry.get(namespace);
 		if(registry == null){
@@ -69,26 +81,25 @@ public class TemplateEngine {
 		if(context.getRoot()==null){
 			context.setRoot(tag);
 		}
-		tag.setElement(el);
+	
 		tag.startTag();
 		 
         for ( Iterator i = el.attributeIterator(); i.hasNext(); ) {
-            Attribute attribute = (Attribute) i.next();
+            Attribute attribute = (Attribute) i.next();          
             tag.addAttribute(attribute.getName(),attribute.getText());
         }
         
          
         for ( Iterator i = el.elementIterator(); i.hasNext(); ) {
             Element element = (Element) i.next();
-            context.setCurrentElement(element);
+            context.setElement(element);
             
             Tag child = parseElement();
-            context.setCurrentElement(el);         
+            context.setElement(el);         
             tag.addChild(child);            
         }
-        context.setCurrentElement(el);
-        String text = el.getText();
-        tag.setTextContent(text);
+        
+        context.setElement(el);         
         tag.endTag();
         return tag;
 	}

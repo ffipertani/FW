@@ -1,8 +1,14 @@
-var BaseWidget = Widget.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var BaseWidget = fw.create([Widget],{
 
+  
+  setId:function(id){
+	  this.id = id;
+  },
+  
+  getId:function(){
+	  return this.id;
+  },
+  
   setWidth : function(width){
 	  this.width = width;
   },
@@ -17,6 +23,16 @@ var BaseWidget = Widget.$extend({
   
   getHeight : function(){
 	  return this.height;
+  },
+  
+  getPage:function(){
+	  var wgt = this;
+	  if(this.parent==null){
+		  return this;
+	  }
+	 
+	  return wgt.parent.getPage();
+	  
   }
   
    

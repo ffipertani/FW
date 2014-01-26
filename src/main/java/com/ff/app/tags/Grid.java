@@ -1,7 +1,26 @@
 package com.ff.app.tags;
 
-import com.ff.fw.template.Tag;
 
-public class Grid extends Tag{
+public class Grid extends BaseTag{
+	private String title;
+	private String controller;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getController() {
+		return controller;
+	}
+
+	public void setController(String controller) {
+		this.controller = controller;
+	}
+	
+	
 	
 }

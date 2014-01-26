@@ -1,7 +1,5 @@
-var Column = BaseWidget.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
+var Column = fw.create([BaseWidget],{
+  
 
   setLabel : function(label){
 	  this.label = label;
@@ -17,6 +15,10 @@ var Column = BaseWidget.$extend({
   
   getField : function(){
 	  return this.field;
+  },
+  
+  setAutoSize:function(autoSize){
+	  this.autoSize = autoSize;
   }
   
 });

@@ -1,10 +1,17 @@
 package com.ff.app.tags;
 
-import com.ff.fw.template.Tag;
 
-public class Column extends Tag{
+public class Column extends BaseTag{
 	private String label;
 	private String field;
+	private Boolean autoSize;
+	
+	public Boolean getAutoSize() {
+		return autoSize;
+	}
+	public void setAutoSize(Boolean autoSize) {
+		this.autoSize = autoSize;
+	}
 	public String getLabel() {
 		return label;
 	}

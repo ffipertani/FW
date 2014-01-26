@@ -1,8 +1,5 @@
-var JQColumn = Column.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
- 
+var JQColumn = fw.create([Column],{
+  
   bind:function(){
 	 
   },

@@ -1,26 +1,70 @@
-<page title="Utenti" xmlns="http://com.ff.fw.ext">
-    <grid>
-        <column label="Nome" field="firstname"/>
-        <column label="Cognome" field="lastname"/>
-        <column label="Prodotto" field="product"/>
-        <column label="Prezzo" field="price"/>
-        <column label="Quantita'" field="quantity"/>
-        <column label="Totale" field="total"/>
+<page id="mypage" title="Gestione Utenti" xmlns="http://com.ff.fw.ext">
+    
+    <controller id="userController" autoSearch="true" />
+    
+    <grid id="mygrid" controller="userController">
+        <toolbar>
+            <button id="mybutton" label="MyButton"/>
+        </toolbar>
+        <column label="Nome" field="firstName"/>
+        <column label="Cognome" field="lastName" autoSize="true"/>
+        <column label="Username" field="username"/>
+        <column label="Sesso" field="gender"/>       
+        <column label="Codice fiscale" field="personalCode"/>
+        <column label="Data nascita" field="birthDate"/> 
     </grid>
+    <form id="myform" controller="userController">
+    	<text label="Username" field="username" />
+    	<text label="Cognome" field="lastName" />
+    	<text label="Nome" field="firstName" />
+    	<comboBox id="gender" label="Sesso" field="gender" valueField="value" displayField="description"/>
+    	<calendar id="calendar" label="Data nascita" field="birthDate"/>  
+    </form>
     <tabPanel>
        	 <tab label="Gruppi">
-            <text label="Username" value="un testo" />
-     		 
-     		<checkBox label="Val1" />
+               <grid>
+			        <toolbar>
+			            <button label="Crea gruppo"/>
+			        </toolbar>
+			        <column label="Nome" field="name"/>
+			        <column label="Descrizione" field="description" autoSize="true"/>			         
+			    </grid>
         </tab>
         <tab label="Profili">
-            
-            <freeText>
-                Ciao mondo infame
-                
-            </freeText>
+            <grid>
+			        <toolbar>
+			            <button label="Crea profilo"/>
+			        </toolbar>
+			        <column label="Nome" field="name"/>
+			        <column label="Descrizione" field="description" autoSize="true"/>			         
+			    </grid>
         </tab>
     </tabPanel>
       
      <button label="Salva tutto" width="12"/>
+     
+     <script>
+      <![CDATA[ 
+      var userService = new UserService();
+      
+      gender.load(userService.listGenders());
+      
+      userController.doSearch=function(){
+      	 return userService.search();
+      }
+  
+     
+     mybutton.onClick(function(){
+      
+     	var win = new ExtWindow({
+     		title:"PROVA",
+     		width:600,
+     		height:400
+     	});
+     	win.open("http://localhost:8080/FW/template/get/popup.xml");
+     });
+     
+     
+      ]]>
+     </script>
 </page>

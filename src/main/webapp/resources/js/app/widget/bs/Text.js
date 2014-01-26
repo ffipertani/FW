@@ -1,11 +1,5 @@
-var BSText = Text.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
-   
-  
-  
+var BSText = fw.create([Text],{
+    
   bind: function(){
 	   
   },

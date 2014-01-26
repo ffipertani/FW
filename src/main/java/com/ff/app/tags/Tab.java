@@ -2,7 +2,7 @@ package com.ff.app.tags;
 
 import com.ff.fw.template.Tag;
 
-public class Tab extends Tag{
+public class Tab extends BaseTag{
 	private String label;
 
 	public String getLabel() {

@@ -1,8 +1,5 @@
-var JQPage = Page.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
+var JQPage = fw.create([Page],{
+  
   render : function(out) {
     out.push('<div id="'+this.uuid+'">');
     this.renderChildren(out);

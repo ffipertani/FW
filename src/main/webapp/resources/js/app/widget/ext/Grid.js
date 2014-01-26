@@ -1,84 +1,73 @@
-var ExtGrid = Grid.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-	  this.initData();
-  },
+var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 
-  initData:function(){
-	  this.data = new Array();
+ createExt:function(){
+	 var wgt = this;
+	 var columns = new Array();
+	 var fields = new Array();
+	 var children = this.getChildren();
+	 var toolbar = null;
+	 	
+		for(var i=0;i<children.length;i++){
+			var child = children[i];
+			if(child.instance(Column)){
+				columns.push(child.createExt());
+				fields.push(child.getField());
+			}
+			if(child.instance(Toolbar)){				
+				toolbar = child.createExt();				
+			}
+		}
+	 
+	 
+	 this.store = Ext.create('Ext.data.Store', {
+		    storeId:this.uuid+'Store',
+		    fields:fields,
+		    data:{'items':[]},
+		    proxy: {
+		        type: 'memory',
+		        reader: {
+		            type: 'json',
+		           // root: 'items'
+		        }
+		    }
+		});
+	 
+	 this.ext =  Ext.create('Ext.grid.Panel', {
+		    title: this.title,
+		    store: Ext.data.StoreManager.lookup(this.uuid+'Store'),
+		    viewConfig: {forceFit: true}, 
+		    columns: [
+		       columns
+		    ],
+		    listeners: {
+		    	selectionChange:function(sender, selected, eOpts ){wgt.selectionChange(wgt,selected)},
+		    },
+		    height: 450,
+		    width: '100%',
+		    dockedItems: [toolbar]
+		});
+	 return this.ext;
+ },
+ 
+ selectionChange:function(wgt, selected ){
+	 
+	 for(var i=0;i<wgt.rowChangeListeners.length;i++){
+		 var listener = wgt.rowChangeListeners[i];
+		 var selectedRecord = selected[0]; 
+		 var row = this.ext.store.indexOf(selectedRecord);
+		 listener(row,selectedRecord);
+	 }
+ },
+ 
+ 
+ setData:function(data){
+	 //this.store.data = data;
 	  
-	  var firstNames =
-          [
-              "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
-          ];
-          var lastNames =
-          [
-              "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
-          ];
-          var productNames =
-          [
-              "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
-          ];
-          var priceValues =
-          [
-              "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
-          ];
-          
-          var generaterow = function (i) {
-              var row = {};
-              var productindex = Math.floor(Math.random() * productNames.length);
-              var price = parseFloat(priceValues[productindex]);
-              var quantity = 1 + Math.round(Math.random() * 10);
-              row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
-              row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
-              row["productname"] = productNames[productindex];
-              row["price"] = price;
-              row["quantity"] = quantity;
-              row["total"] = price * quantity;
-              return row;
-          }
-          
-          for (var i = 0; i < 12; i++) {
-              var row = generaterow(i);
-              this.data[i] = row;
-          }
-          
-  
-  },
-  bind:function(){
-	           
-	
-  },
-  
-  render : function(out) {
-	  var children = this.getChildren();
-	  out.push('<table id="'+this.uuid+'" class="table table-hover">');
-    
-	out.push('<tr>');
-	  for(var i=0;i<children.length;i++){
-			 var child = children[i];
-			 out.push('<th>');			 
-			 out.push(child.getLabel());
-			 out.push('</th>');
-	  }
-	  out.push('</tr>');
-	
-	  
-	  for(var i=0;i<this.data.length;i++){
-			 var data = this.data[i];
-			 out.push('<tr>');
-			 for(var k=0;k<children.length;k++){
-				 var child = children[k];
-				 out.push('<td>');				 
-				 out.push(data[child.getField()]);
-				 out.push('</td>');
-			 }
-			 out.push('</tr>');
-	  }
-    out.push('</table>');
-  },
-
-  remove : function() {
-    
-  }
+	 this.store.loadData(data,false);
+     this.ext.getView().refresh();
+ }
+ 
+ 
+ 
+ 
 });

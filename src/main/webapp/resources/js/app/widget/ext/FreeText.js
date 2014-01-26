@@ -1,21 +1,14 @@
-var ExtFreeText = FreeText.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
-  setContent : function(content){
-	  this.content = content;
-  },
+var ExtFreeText = fw.create([FreeText,ExtBaseWidget],{
   
-  bind:function(){
-	  
-  },
+ 
   
-  render : function(out) {
-    out.push('<p>'+this.textContent+'</p>');
-  },
-
-  remove : function() {
-    
-  }
+  createExt:function(){
+	  return this.createInstance('Ext.panel.Panel', {
+		    title: this.title,
+		    html:'<p>'+this.textContent+'</p>',
+		    width: 800,		   
+		    height:400		    
+		   
+	  });
+  } 
 });

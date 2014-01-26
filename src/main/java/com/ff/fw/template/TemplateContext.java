@@ -9,7 +9,7 @@ public class TemplateContext {
 	private static ThreadLocal<TemplateContext> THREAD_LOCAL = new ThreadLocal();
     
 	private Map<String,Object> attributes = new HashMap<String,Object>();
-	private Element currentElement;
+	private Element element;
 	private Element docRoot;
 	private Tag root;
    
@@ -32,11 +32,11 @@ public class TemplateContext {
 	public void setAttributes(Map<String, Object> attributes) {
 		this.attributes = attributes;
 	}
-	public Element getCurrentElement() {
-		return currentElement;
+	public Element getElement() {
+		return element;
 	}
-	public void setCurrentElement(Element currentElement) {
-		this.currentElement = currentElement;
+	public void setElement(Element element) {
+		this.element = element;
 	}
 	public Element getDocRoot() {
 		return docRoot;

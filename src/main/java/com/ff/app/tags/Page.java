@@ -1,8 +1,7 @@
 package com.ff.app.tags;
 
-import com.ff.fw.template.Tag;
 
-public class Page extends Tag {
+public class Page extends BaseTag {
 	private String title;
 	
 	 

@@ -1,26 +1,20 @@
-var ExtTab = Tab.$extend({
-  __init__ : function(name) {
-	  this.$super(name);
-  },
-
-  bind:function(){	   
-	  
+var ExtTab = fw.create([Tab,ExtBaseWidget],{
+ 
+  createExt:function(){	   
+	  var items = this.createItems();
+	  return {
+		  items:items,
+		  xtype:'panel',
+		  title:this.label
+		  
+	  }; 
+	  /*
 	  Ext.create('Ext.tab.Tab', {
-		    		   
-		    renderTo : this.uuid
-		}); 
+		    	items:items,
+		    	title:this.label
+		});
+		*/ 
 		  
   },
-  
-  render : function(out) {
-    out.push('<div id="'+this.uuid+'">');
- 
-    this.renderChildren(out);
-   
-    out.push('</div>');
-  },
-
-  remove : function() {
     
-  }
 });
