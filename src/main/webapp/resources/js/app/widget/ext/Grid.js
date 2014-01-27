@@ -22,6 +22,7 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 	 this.store = Ext.create('Ext.data.Store', {
 		    storeId:this.uuid+'Store',
 		    fields:fields,
+		    pageSize: 10,
 		    data:{'items':[]},
 		    proxy: {
 		        type: 'memory',
@@ -44,7 +45,14 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 		    },
 		    height: 450,
 		    width: '100%',
-		    dockedItems: [toolbar]
+		    dockedItems: [toolbar],
+		    bbar: Ext.create('Ext.PagingToolbar', {
+	            store: wgt.store,
+	          
+	            displayInfo: true,
+	            displayMsg: 'Displaying rows {0} - {1} of {2}',
+	            emptyMsg: "No rows to display",	            
+	        }),
 		});
 	 return this.ext;
  },

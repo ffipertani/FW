@@ -28,11 +28,7 @@ var Controller = fw.create([Widget],{
 	 res.done(function(resp){
 		 
 		var models = JSON.parse(resp);
-		wgt.models = models;
-		for(var i=0;i<wgt.grids.length;i++){
-			
-			wgt.grids[i].setData(models);	
-		}
+		wgt.setModels(models);
 		
 	 });
   },
@@ -51,30 +47,59 @@ var Controller = fw.create([Widget],{
 	
 	grid.onRowChange(function(row,selected){
 		console.log(row+" "+selected);
-		for(var i=0;i<wgt.forms.length;i++){
-			wgt.setFormData(row,wgt.forms[i]);
-		}
+		wgt.setSelectedIndex(row);
 	});
 	this.grids.push(grid);  
   },
   
   setFormData:function(row,widget){     
-      var model = this.models[row];
+     
  		var children = widget.getChildren();
 		for(var i=0;i<children.length;i++){
 			 var child = children[i];
 			 if(child.instance(FormWidget)){				 
-			 	var toeval = "child.setValue(model."+child.getField()+")";
+			 	var toeval = "child.setValue(this.model."+child.getField()+")";
 			    
 			 	eval(toeval);				 
 			 }
 		}
   },  
   
+  setSelectedIndex:function(index){
+	this.selectedIndex = index;
+	this.model = this.models[index];
+	
+	for(var i=0;i<this.forms.length;i++){
+		this.setFormData(index,this.forms[i]);
+	}
+	
+	
+	
+	var children = this.getChildren();
+	for(var i=0;i<children.length;i++){
+		var child = children[i];
+		if(child.instance(Controller)){
+			var property = child.getProperty();
+			 
+			if(property == null){
+				continue;
+			}
+			var value = this.model[property];
+			
+			child.setModels(value);
+		}
+	}
+  },
   
   
-  
-  
+  setModels:function(models){
+	  var wgt = this;
+	  wgt.models = models;
+		for(var i=0;i<wgt.grids.length;i++){
+			
+			wgt.grids[i].setData(models);	
+		}		
+  },
   
   
   
@@ -95,6 +120,14 @@ var Controller = fw.create([Widget],{
   
   getId:function(){
 	  return this.id;
+  },
+  
+  setProperty:function(property){
+	  this.property = property;
+  },
+  
+  getProperty:function(){
+	  return this.property;
   },
   
   

@@ -32,8 +32,12 @@
 		<!-- APPLICATION INCLUDES -->
 		
 		 <link rel="stylesheet" href="/FW/resources/js/app/lib/jqwidgets/styles/jqx.base.css" type="text/css" />
-		 <link rel="stylesheet" href="/FW/resources/js/app/lib/ext/resources/css/ext-all-gray.css" type="text/css" />
-		 
+		 <link rel="stylesheet" href="/FW/resources/js/app/lib/ext/resources/css/ext-all.css" type="text/css" />
+		 <style>
+		 .x-tool-close{
+		 	margin-top:-5px !important;
+		 }
+		 </style>
 		 
 		<script src="/FW/resources/js/app/lib/ext/ext-all.js"></script>
 		

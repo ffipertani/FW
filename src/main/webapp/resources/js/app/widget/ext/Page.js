@@ -10,8 +10,8 @@ var ExtPage = fw.create([Page,ExtBaseWidget],{
 	 this.ext = Ext.create('Ext.panel.Panel', {
 		    title: this.title,
 		  items:items,
-		    width: 1200,		   
-		    height:1200,		    
+		   // width: 1200,		   
+		   // height:1200,		    
 		    renderTo:renderTo
 	  });
 	 

@@ -5,7 +5,7 @@ import com.ff.fw.template.Tag;
 public class Controller extends Tag{
 	private String id;
 	private Boolean autoSearch;
-
+	private String property;
 	
 	@Override
 	public void endTag() {		
@@ -30,6 +30,14 @@ public class Controller extends Tag{
 
 	public void setAutoSearch(Boolean autoSearch) {
 		this.autoSearch = autoSearch;
+	}
+
+	public String getProperty() {
+		return property;
+	}
+
+	public void setProperty(String property) {
+		this.property = property;
 	}
 	
 	

@@ -1,12 +1,16 @@
 <page id="mypage" title="Gestione Utenti" xmlns="http://com.ff.fw.ext">
     
-    <controller id="userController" autoSearch="true" />
+    <controller id="userController" autoSearch="true" >
+    	<controller id="groupController" property="groups"/>
+    	<controller id="profileController" property="profiles"/>
+    </controller>
     
     <grid id="mygrid" controller="userController">
         <toolbar>
-            <button id="mybutton" label="MyButton"/>
+            <button id="mybutton" label="Apri"/>
+            <button id="closeButton" label="Chiudi"/>
         </toolbar>
-        <column label="Nome" field="firstName"/>
+        <column label="Nome" field="firstName" autoSize="true"/>
         <column label="Cognome" field="lastName" autoSize="true"/>
         <column label="Username" field="username"/>
         <column label="Sesso" field="gender"/>       
@@ -22,7 +26,7 @@
     </form>
     <tabPanel>
        	 <tab label="Gruppi">
-               <grid>
+               <grid controller="groupController">
 			        <toolbar>
 			            <button label="Crea gruppo"/>
 			        </toolbar>
@@ -31,7 +35,7 @@
 			    </grid>
         </tab>
         <tab label="Profili">
-            <grid>
+            <grid controller="profileController">
 			        <toolbar>
 			            <button label="Crea profilo"/>
 			        </toolbar>
@@ -45,6 +49,7 @@
      
      <script>
       <![CDATA[ 
+      var win;
       var userService = new UserService();
       
       gender.load(userService.listGenders());
@@ -53,12 +58,15 @@
       	 return userService.search();
       }
   
+     closeButton.onClick(function(){
+     	win.close();
+     });
      
      mybutton.onClick(function(){
       
-     	var win = new ExtWindow({
+     	win = new ExtWindow({
      		title:"PROVA",
-     		width:600,
+     		width:800,
      		height:400
      	});
      	win.open("http://localhost:8080/FW/template/get/popup.xml");

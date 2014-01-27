@@ -102,6 +102,10 @@ public class UserController {
 		user.setGender(random(0,1)==1?"M":"F");
 		user.setBirthDate(new Date(random(1000000000,10000000000L)*1000)); 	
 		
+		user.getGroups().add(new Group(1L,"Gr1","Gruppo di prova"));
+		user.getGroups().add(new Group(2L,"Gr2","Gruppo di prova 2"));
+		user.getGroups().add(new Group(3L,"Gr3","Gruppo di prova 3"));
+		user.getGroups().add(new Group(4L,"Gr4","Gruppo di prova 4"));
 		
 		
 		return user;
