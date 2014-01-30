@@ -13,10 +13,15 @@ var Widget = fw.create({
     
     this.children.oldpush = this.children.push;
     this.children.push = function(obj){    	
-    	obj.parent = wgt;
-    	wgt.children.oldpush(obj);
+    	wgt.addChild(obj);
     };
   
+  },
+  
+  addChild:function(child){
+	  child.parent = this;
+  	  this.children.oldpush(child);
+	  
   },
   
   createConfig:function(config){

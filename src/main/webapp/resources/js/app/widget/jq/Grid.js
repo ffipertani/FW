@@ -88,7 +88,7 @@ var JQGrid = fw.create([Grid],{
   },
   
   
-  setData:function(data){	  
+  createContent:function(data){	  
 	  this.source.localdata = data;
 	  this.dataAdapter = new $.jqx.dataAdapter(this.source, {
           downloadComplete: function (data, status, xhr) {},

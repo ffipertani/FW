@@ -22,7 +22,13 @@
     	<text label="Cognome" field="lastName" />
     	<text label="Nome" field="firstName" />
     	<comboBox id="gender" label="Sesso" field="gender" valueField="value" displayField="description"/>
-    	<calendar id="calendar" label="Data nascita" field="birthDate"/>  
+    	<calendar id="calendar" label="Data nascita" field="birthDate"/>
+    	<lookup id="lookup" label="Ruolo" field="role" valueField="cdRole" displayField="description" >
+    	    <lookupGrid width="800" height="400" title="Scegli ruolo">
+    	    	<column label="Codice" field="cdRole" autoSize="false"/>
+        		<column label="Descrizione" field="description" autoSize="true"/>
+        	</lookupGrid>
+    	</lookup>  
     </form>
     <tabPanel>
        	 <tab label="Gruppi">
@@ -53,6 +59,10 @@
       var userService = new UserService();
       
       gender.load(userService.listGenders());
+      
+      lookup.doSearch=function(){
+      	return userService.listRoles();
+      }
       
       userController.doSearch=function(){
       	 return userService.search();

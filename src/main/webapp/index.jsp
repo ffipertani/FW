@@ -33,13 +33,32 @@
 		
 		 <link rel="stylesheet" href="/FW/resources/js/app/lib/jqwidgets/styles/jqx.base.css" type="text/css" />
 		 <link rel="stylesheet" href="/FW/resources/js/app/lib/ext/resources/css/ext-all.css" type="text/css" />
+		 
 		 <style>
 		 .x-tool-close{
 		 	margin-top:-5px !important;
 		 }
+		 .mylookup .x-form-trigger{
+			width:16px;
+			height:16px;
+			left:-4px;
+			
+			background:transparent url(/FW/resources/js/app/img/image.png) no-repeat 0 0;
+			/*
+			border:1px solid #b5b8c8;
+			float:right;
+			border:0;
+			cursor:pointer;
+			border-bottom: 1px solid #B5B8C8;
+			position:absolute;
+			
+			*/	
+			}
 		 </style>
 		 
 		<script src="/FW/resources/js/app/lib/ext/ext-all.js"></script>
+		<script src="/FW/resources/js/app/lib/ext/header_plugin.js"></script>
+		<script src="/FW/resources/js/app/lib/ext/examples/ux/data/PagingMemoryProxy.js"></script>
 		
 		<script src="/FW/resources/js/app/lib/jquery.js"></script>
 		<script src="/FW/resources/js/app/lib/jqwidgets/jqx-all.js"></script>
@@ -56,6 +75,7 @@
 		<script src="/FW/resources/js/app/widget/Script.js"></script>
 		<script src="/FW/resources/js/app/widget/FormWidget.js"></script>
 		<script src="/FW/resources/js/app/widget/Button.js"></script>
+		
 		<script src="/FW/resources/js/app/widget/Page.js"></script>
 		<script src="/FW/resources/js/app/widget/Text.js"></script>
 		<script src="/FW/resources/js/app/widget/Calendar.js"></script>
@@ -67,7 +87,9 @@
 		<script src="/FW/resources/js/app/widget/Grid.js"></script>
 		<script src="/FW/resources/js/app/widget/Column.js"></script>
 		<script src="/FW/resources/js/app/widget/Toolbar.js"></script>
-		
+		<script src="/FW/resources/js/app/widget/Popup.js"></script>		
+		<script src="/FW/resources/js/app/widget/LookupGrid.js"></script>
+		<script src="/FW/resources/js/app/widget/Lookup.js"></script>
 		
 		<!-- Jq Widgets -->		
 		<script src="/FW/resources/js/app/widget/jq/Button.js"></script>
@@ -106,6 +128,7 @@
 		<script src="/FW/resources/js/app/widget/ext/Button.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/Page.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/Text.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/Lookup.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/Calendar.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/CheckBox.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/ComboBox.js"></script>
@@ -115,7 +138,8 @@
 		<script src="/FW/resources/js/app/widget/ext/Grid.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/Column.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/Toolbar.js"></script>
-		
+		<script src="/FW/resources/js/app/widget/ext/Popup.js"></script>
+		<script src="/FW/resources/js/app/widget/ext/LookupGrid.js"></script>
 		
 		
 		<!-- SERVICES -->		

@@ -6,7 +6,14 @@ var ExtColumn = fw.create([Column,ExtBaseWidget],{
 			flex=1;
 		}
 		return{
-			header: this.label,  dataIndex: this.field, flex:flex
+			header: this.label, 
+			dataIndex: this.field, 
+			flex:flex,
+		    
+			filter: {
+                xtype: 'textfield'
+            }
+             
 		};
 	}
   

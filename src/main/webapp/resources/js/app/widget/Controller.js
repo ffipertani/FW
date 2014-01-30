@@ -97,7 +97,7 @@ var Controller = fw.create([Widget],{
 	  wgt.models = models;
 		for(var i=0;i<wgt.grids.length;i++){
 			
-			wgt.grids[i].setData(models);	
+			wgt.grids[i].createContent(models);	
 		}		
   },
   
@@ -136,7 +136,16 @@ var Controller = fw.create([Widget],{
 	 
 	  return wgt.parent.getPage();
 	  
+  },
+  
+  setPageSize:function(){
+	  return this.pageSize;
+  },
+  
+  getPageSize:function(pageSize){
+	  this.pageSize = pageSize;
   }
+  
   
    
 });

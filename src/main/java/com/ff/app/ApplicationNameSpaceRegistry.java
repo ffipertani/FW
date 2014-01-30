@@ -11,6 +11,8 @@ import com.ff.app.tags.Controller;
 import com.ff.app.tags.Form;
 import com.ff.app.tags.FreeText;
 import com.ff.app.tags.Grid;
+import com.ff.app.tags.Lookup;
+import com.ff.app.tags.LookupGrid;
 import com.ff.app.tags.Page;
 import com.ff.app.tags.Script;
 import com.ff.app.tags.Tab;
@@ -64,6 +66,8 @@ public class ApplicationNameSpaceRegistry extends NamespaceRegistry{
 		ext.register("button", "ExtButton", Button.class);
 		ext.register("page",  "ExtPage", Page.class);
 		ext.register("text", "ExtText", Text.class);
+		ext.register("lookup", "ExtLookup", Lookup.class);
+		ext.register("lookupGrid", "ExtLookupGrid", LookupGrid.class);
 		ext.register("tabPanel", "ExtTabPanel", TabPanel.class);
 		ext.register("tab", "ExtTab", Tab.class);
 		ext.register("calendar", "ExtCalendar", Calendar.class);		

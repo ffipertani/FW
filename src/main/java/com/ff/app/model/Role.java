@@ -1,21 +1,15 @@
 package com.ff.app.model;
 
-public class Role {
-	private Long id;
-	private String name;
+public class Role {	 
+	private String cdRole;
 	private String description;
 	
-	public Long getId() {
-		return id;
+	
+	public String getCdRole() {
+		return cdRole;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCdRole(String cdRole) {
+		this.cdRole = cdRole;
 	}
 	public String getDescription() {
 		return description;

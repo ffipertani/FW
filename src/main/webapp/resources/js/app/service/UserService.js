@@ -6,4 +6,8 @@ var UserService = function(){
 	this.listGenders = function(){
 		return ajax("http://localhost:8080/FW/user/listGenders");
 	};
+	
+	this.listRoles = function(){
+		return ajax("http://localhost:8080/FW/user/listRoles");
+	};
 } 

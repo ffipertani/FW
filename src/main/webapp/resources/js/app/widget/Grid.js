@@ -33,5 +33,13 @@ var Grid = fw.create([BaseWidget],{
 
 	onRowChange:function(listener){
 		this.rowChangeListeners.push(listener);
+	},
+	
+	setData:function(data){
+		this.data = data;
+	},
+
+	getData:function(){
+		return this.data;
 	}
 });

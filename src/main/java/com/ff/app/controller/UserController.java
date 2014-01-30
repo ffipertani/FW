@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ff.app.model.Group;
+import com.ff.app.model.Role;
 import com.ff.app.model.User;
 
 @Controller
@@ -94,6 +95,26 @@ public class UserController {
 		return genders;
 	}
 	
+	@RequestMapping(value = "/listRoles", method = RequestMethod.GET)
+	public @ResponseBody List<Map> searchRoles(){
+		List<Map> genders = new ArrayList<Map>();
+		
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("cdRole", "ADMIN");
+			map.put("description","Amministratore di sistema");
+			genders.add(map);
+			map = new HashMap<String, Object>();
+			map.put("cdRole", "USER");
+			map.put("description","Utente");
+			genders.add(map);
+			map = new HashMap<String, Object>();
+			map.put("cdRole", "CRTN");
+			map.put("description","Cretino");
+			genders.add(map);
+		 
+		return genders;
+	}
+	
 	private User createUser(int index){
 		User user = new User();
 		user.setFirstName(names[index].split(" ")[0]);
@@ -107,6 +128,10 @@ public class UserController {
 		user.getGroups().add(new Group(3L,"Gr3","Gruppo di prova 3"));
 		user.getGroups().add(new Group(4L,"Gr4","Gruppo di prova 4"));
 		
+		Role role = new Role();
+		role.setDescription("Amministratore di sistema");
+		role.setCdRole("ADMIN");
+		user.setRole(role);
 		
 		return user;
 	}
