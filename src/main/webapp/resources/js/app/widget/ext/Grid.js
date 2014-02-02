@@ -41,7 +41,8 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 	 
 	 var storeConfig = {			 
 				    storeId:this.uuid+'Store',
-				    fields:fields,		   				     
+				    fields:fields,		  
+				    sortOnLoad: false,
 				    proxy: {
 				    	type: 'memory',
 				        reader: {
@@ -61,25 +62,42 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 	 if(toolbar!=null){
 		 dockedItems.push(toolbar);
 	 }
-	 dockedItems.push({
-		                	  xtype: 'pagingtoolbar',
-		                	  store: this.store,
-		                	  dock: 'bottom',
-		                	  displayInfo: true,
-
-		                  });
+	 this.paginator = Ext.create('Ext.toolbar.Paging',{
+       	
+    	  store: this.store,
+    	  dock: 'bottom',
+    	  displayInfo: true,
+    	  listeners: {
+    	        'beforechange' : function(toolbar,page,opts){ 
+    	             wgt.pageChange(page);
+    	             return false;
+    	         },
+    	         'afterrender' :function(itex,opts){
+    	   		 // 	alert("CIAO");
+    	   		// this.next.on('click', function () { alert('next'); });
+    	   		  	//alert(this.next);  
+    	         }
+    	  }
+	 });
+	 
+	
+	 dockedItems.push(this.paginator);
+		   
 	 console.log("creating store");
 	 this.ext =  Ext.create('Ext.grid.Panel', {
 		    title: this.title,
 		    store: this.store,
-		    viewConfig: {forceFit: true}, 
+		    
+		    viewConfig: {forceFit: true,loadMask : false}, 
 		    columns: [
 		       columns
 		    ],
 		    listeners: {
+		    	beforeheaderfiltersapply:function(grid, filters, store){ wgt.search(filters);return false;},
 		    	selectionChange:function(sender, selected, eOpts ){wgt.selectionChange(wgt,selected)},
+		    	sortchange:function( ct, column, direction, eOpts ){wgt.sortChange(column,direction);return false;},
 		    },
-		    height: 450,
+		 //   height: 450,
 		    width: '100%',
 		    dockedItems: dockedItems,		   
 		    plugins: [Ext.create('Ext.ux.grid.HeaderFilters')],
@@ -88,21 +106,65 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 	 return this.ext;
  },
  
+ sortChange:function(column,direction){
+	console.log(column.dataIndex+"["+direction+"]"); 
+	 for(var i=0;i<this.sortChangeListener.length;i++){
+		 var listener = this.sortChangeListener[i];
+		 listener(column.dataIndex,direction);
+	 }
+ },
+ 
  selectionChange:function(wgt, selected ){
 	 
 	 for(var i=0;i<wgt.rowChangeListeners.length;i++){
 		 var listener = wgt.rowChangeListeners[i];
-		 var selectedRecord = selected[0]; 
-		 var row = this.store.indexOf(selectedRecord);
-		 listener(row,selectedRecord.data);
+		 var selectedRecord = selected[0];
+		 var row=-1;
+		 var data = null;
+		 if(selectedRecord!=null){
+			 try{
+			 row = this.store.indexOf(selectedRecord);
+			 data = selectedRecord.data;
+		 	 }catch(err){
+		 		 row = -1;
+		 		 data = null;
+		 	 }
+			 
+		 }
+		 listener(row,data);
 	 }
  },
  
+ pageChange:function(page){	 
+	 for(var i=0;i<this.pageChangeListeners.length;i++){
+		 var listener = this.pageChangeListeners[i];
+		 listener(page-1);
+	 }
+ },
  
- createContent:function(data){
+ search:function(filter){
+	 
+	 for(var i=0;this.searchListeners.length;i++){
+		 var listener = this.searchListeners[i];
+		 
+		 listener(filter);
+		 
+	 }
+	
+	 
+	// return false;
+ },
+ 
+ 
+ createContent:function(data,total,pageSize,page){
+	 
 	 //this.store.data = data;
-	   
+	  this.store.totalCount= total;
+	  this.store.pageSize = pageSize;
+	  this.store.currentPage = page;
 	 this.store.loadData(data,false);
+     
+     this.paginator.onLoad();
      this.ext.getView().refresh();
  }
  

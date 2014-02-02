@@ -4,7 +4,7 @@ var ExtText = fw.create([Text,ExtBaseWidget],{
 	  return this.createInstance('Ext.form.field.Text', {
 		    name: this.field,
 	        fieldLabel: this.label,
-	        allowBlank: false, 
+	        //allowBlank: false, 
 		       
 		});
 

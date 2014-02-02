@@ -68,6 +68,7 @@
 		<script src="/FW/resources/js/app/lib/bootstrap/js/bootstrap.min.js"></script>
 		
 		
+		<script src="/FW/resources/js/app/widget/MessageBox.js"></script>
 		<script src="/FW/resources/js/app/widget/Controller.js"></script>
 		<script src="/FW/resources/js/app/widget/BaseWidget.js"></script>
 		<script src="/FW/resources/js/app/widget/Window.js"></script>
@@ -122,6 +123,7 @@
 		
 		
 		<!-- Ext Js -->		
+		<script src="/FW/resources/js/app/widget/ext/MessageBox.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/BaseWidget.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/Window.js"></script>
 		<script src="/FW/resources/js/app/widget/ext/Form.js"></script>

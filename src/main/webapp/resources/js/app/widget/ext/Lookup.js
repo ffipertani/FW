@@ -10,7 +10,7 @@ var ExtLookup = fw.create([Lookup,ExtBaseWidget],{
 		    name: this.field,
 	        fieldLabel: this.label,
 	        triggerWrapCls  :'x-form-trigger-wrap mylookup x-btn-default-small',
-	        allowBlank: false, 
+	        //allowBlank: false, 
 		      onTriggerClick:function(){
 		    	 wgt.open();
 		      } 
@@ -19,7 +19,11 @@ var ExtLookup = fw.create([Lookup,ExtBaseWidget],{
   },
 
   changeValue:function(value){	
-	  this.ext.setValue(value[this.displayField]);
+	  if(value!=null){
+		  this.ext.setValue(value[this.displayField]);
+	  }else{
+		  this.ext.setValue(null);
+	  }
   }
    
 });
