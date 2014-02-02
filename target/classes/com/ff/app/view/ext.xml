@@ -51,7 +51,7 @@
         </tab>
     </tabPanel>
       
-     <button label="Salva tutto" width="12"/>
+   
      
      <script>
       <![CDATA[ 
@@ -70,6 +70,7 @@
   
      closeButton.onClick(function(){
      	win.close();
+     	MessageBox.error("Erore durante il salvataggio","Errore");
      });
      
      mybutton.onClick(function(){

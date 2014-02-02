@@ -124,7 +124,7 @@ Ext.define('Ext.ux.grid.plugin.HeaderFilters',{
 	* @cfg {Boolean} enableTooltip
 	* If a tooltip with active filters description must be enabled on the grid header
 	*/
-	enableTooltip: true,
+	enableTooltip: false,
 	
 	statusProperty: 'headerFilters',
 	

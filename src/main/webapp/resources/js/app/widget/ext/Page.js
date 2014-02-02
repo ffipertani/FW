@@ -11,7 +11,7 @@ var ExtPage = fw.create([Page,ExtBaseWidget],{
 		    title: this.title,
 		  items:items,
 		   // width: 1200,		   
-		   // height:1200,		    
+		    //height:1800,		    
 		    renderTo:renderTo
 	  });
 	 
