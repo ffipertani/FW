@@ -1,11 +1,37 @@
 var Lookup =  fw.create([Text],{
 	
+	renderCompleted:function(){
+		var wgt = this;
+		this.controller = new Controller({
+			pageSize:wgt.pageSize,
+		});
+
+		if(this.getChildren().length>0){
+			child = this.getChildren()[0];	
+			child.setControllerInstance(this.controller);
+			child.onRowChange(function(row,model){
+				 wgt.setModel(child,model);
+			});
+		
+			//child.setData(data);
+		}	
+	},
+	
 	open:function(){
 		var wgt = this;
+		
+		this.controller.doSearch = this.doSearch;
+		
+		this.controller.search(function(models){
+			wgt.doAfterSearch(models);
+		});
+		
+		 /*
 		this.doSearch().done(function(resp){
 			var data = JSON.parse(resp);
 			wgt.doAfterSearch(data);
 		});
+		 */
 	},
 	
 	setModel:function(win,model){
@@ -21,16 +47,18 @@ var Lookup =  fw.create([Text],{
 		var children = this.getChildren();
 		var child;
 	
-	if(children.length>0){
-		child = children[0];		
-		child.open(data);
-		child.onRowChange(function(row,model){
-			 wgt.setModel(child,model);
-			
-		});
+	   if(children.length>0){
+			child = children[0];		
+			child.open(data);
+			/*
+			child.onRowChange(function(row,model){
+				 wgt.setModel(child,model);
+				
+			});
+			*/
 	
 		//child.setData(data);
-	}
+	   }
 		
 		
 		/*

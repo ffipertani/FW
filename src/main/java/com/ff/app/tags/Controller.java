@@ -6,6 +6,7 @@ public class Controller extends Tag{
 	private String id;
 	private Boolean autoSearch;
 	private String property;
+	private int pageSize;
 	
 	@Override
 	public void endTag() {		
@@ -38,6 +39,14 @@ public class Controller extends Tag{
 
 	public void setProperty(String property) {
 		this.property = property;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 	

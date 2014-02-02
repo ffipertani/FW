@@ -5,7 +5,9 @@ var ExtTabPanel = fw.create([ TabPanel, ExtBaseWidget ], {
 		return this.createInstance('Ext.tab.Panel', {
 			items : items,
 			width : '100%',
-			height : 200,
+			//height : '100%',
+			layout:'fit',
+			minHeight:250,
 			activeTab : 0,
 
 		});

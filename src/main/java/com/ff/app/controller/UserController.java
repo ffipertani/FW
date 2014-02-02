@@ -71,7 +71,7 @@ public class UserController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody List<User> search(){
 		List<User> users = new ArrayList<User>();
-		for(int i=0;i<20;i++){
+		for(int i=0;i<18;i++){
 			User user = createUser(i);
 			users.add(user);
 		}

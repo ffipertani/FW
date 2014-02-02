@@ -1,7 +1,7 @@
 <page id="mypage" title="Gestione Utenti" xmlns="http://com.ff.fw.ext">
     
     <controller id="userController" autoSearch="true" >
-    	<controller id="groupController" property="groups"/>
+    	<controller id="groupController" property="groups" pageSize="5"/>
     	<controller id="profileController" property="profiles"/>
     </controller>
     
@@ -24,7 +24,7 @@
     	<comboBox id="gender" label="Sesso" field="gender" valueField="value" displayField="description"/>
     	<calendar id="calendar" label="Data nascita" field="birthDate"/>
     	<lookup id="lookup" label="Ruolo" field="role" valueField="cdRole" displayField="description" >
-    	    <lookupGrid width="800" height="400" title="Scegli ruolo">
+    	    <lookupGrid width="800" height="400" title="Scegli ruolo" pageSize="10">
     	    	<column label="Codice" field="cdRole" autoSize="false"/>
         		<column label="Descrizione" field="description" autoSize="true"/>
         	</lookupGrid>

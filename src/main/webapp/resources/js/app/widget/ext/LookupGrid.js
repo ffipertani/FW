@@ -1,41 +1,61 @@
-var ExtLookupGrid = fw.create([LookupGrid,ExtGrid,ExtBaseWidget],{
+var ExtLookupGrid = fw.create([ LookupGrid, ExtGrid, ExtBaseWidget ], {
 
-	 
- createExt:function(){
-	 var title = this.title;
-	 this.title=null;
-	 console.log("Calling super "+ this.data.length);
-	this.$super();
-	this.title = title;
-	return this.ext;
- },
- 
- open:function(data){
-	 
-	 this.setData(data);
-	 this.grid = this.createExt();
-	  this.ext = this.createInstance('Ext.window.Window', {
-		   title : this.title,
-		    height:parseInt(this.height), 
-		    width:parseInt(this.width),	
-		    items:[this.grid]
+	createExt : function() {
+		var title = this.title;
+		var height = this.height;
+		this.title = null;
+		this.height = null;
+		// this.data = this._data;
+		// console.log("Calling super "+ this._data.length);
+		this.$super();
+
+		this.title = title;
+		this.height = height;
+		this.grid = this.ext;
+		this.ext = this.createInstance('Ext.window.Window', {
+			title : this.title,
+
+			width : parseInt(this.width),
+		//	height : parseInt(this.height),
+
+			items : [ this.grid ]
 		});
-	this.ext.show(); 
- },
+		return this.ext;
+	},
 
- 
- createContent:function(data){
-	 //this.store.data = data;	
-	 this.grid.store.loadData(data,true);
-     this.grid.getView().refresh();
- },
- 
- close:function(){	
-	  this.ext.destroy();
-	  
- }
- 
- 
- 
- 
+	open : function() {
+		var wgt = this;
+		// this.grid = this.createExt();
+
+		// this.createContent(this._data,this._total,this._pageSize,this._page);
+		/*
+		 * this.ext = this.createInstance('Ext.window.Window', { title :
+		 * this.title, layout:'fit', width:parseInt(this.width),
+		 * height:parseInt(this.height),
+		 * 
+		 * items:[this.grid] });
+		 */
+		this.ext.show();
+	},
+
+	createContent : function(data, total, pageSize, page) {
+
+		// this.store.data = data;
+		this.store.totalCount = total;
+
+		this.store.pageSize = pageSize;
+		this.store.currentPage = page;
+		this.store.loadData(data, false);
+
+		this.grid.setHeight(ROW_HEIGHT * pageSize);
+		this.paginator.onLoad();
+		//this.grid.getView().refresh();
+
+	},
+
+	close : function() {
+		this.ext.hide();
+
+	}
+
 });

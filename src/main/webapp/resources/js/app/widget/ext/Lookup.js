@@ -4,8 +4,7 @@ var ExtLookup = fw.create([Lookup,ExtBaseWidget],{
   createExt: function(){
  
 	  var wgt = this;
-	  
-	  
+	 var win = this.createItems(); 
 	  return this.createInstance('Ext.form.field.Trigger', {
 		    name: this.field,
 	        fieldLabel: this.label,

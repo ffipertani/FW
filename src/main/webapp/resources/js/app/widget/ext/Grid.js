@@ -5,6 +5,7 @@ Ext.Loader.setConfig({
 Ext.Loader.setPath('Ext.ux', '/resources/js/app/lib/ext/examples/ux');
 Ext.require('Ext.ux.data.PagingMemoryProxy');
 
+var ROW_HEIGHT = 33;
 
 var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 
@@ -72,17 +73,18 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
     	             wgt.pageChange(page);
     	             return false;
     	         },
-    	         'afterrender' :function(itex,opts){
-    	   		 // 	alert("CIAO");
-    	   		// this.next.on('click', function () { alert('next'); });
-    	   		  	//alert(this.next);  
-    	         }
+    	         
     	  }
 	 });
 	 
 	
 	 dockedItems.push(this.paginator);
-		   
+	var height = null;
+	if(this.height!=null){
+		height=this.height;
+	}else if(this.pageSize!=null){
+		height = this.pageSize*ROW_HEIGHT;
+	}
 	 console.log("creating store");
 	 this.ext =  Ext.create('Ext.grid.Panel', {
 		    title: this.title,
@@ -97,8 +99,12 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 		    	selectionChange:function(sender, selected, eOpts ){wgt.selectionChange(wgt,selected)},
 		    	sortchange:function( ct, column, direction, eOpts ){wgt.sortChange(column,direction);return false;},
 		    },
-		 //   height: 450,
+		    layout:'fit',
+		   // height: 350,
+		    height:height,
+		    minHeight:250,
 		    width: '100%',
+		
 		    dockedItems: dockedItems,		   
 		    plugins: [Ext.create('Ext.ux.grid.HeaderFilters')],
 		  
@@ -115,7 +121,10 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
  },
  
  selectionChange:function(wgt, selected ){
-	 
+	 console.log(selected);
+	 if(selected==null){		 
+		 return;
+	 }
 	 for(var i=0;i<wgt.rowChangeListeners.length;i++){
 		 var listener = wgt.rowChangeListeners[i];
 		 var selectedRecord = selected[0];
@@ -144,7 +153,7 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
  
  search:function(filter){
 	 
-	 for(var i=0;this.searchListeners.length;i++){
+	 for(var i=0;i<this.searchListeners.length;i++){
 		 var listener = this.searchListeners[i];
 		 
 		 listener(filter);
@@ -160,12 +169,16 @@ var ExtGrid = fw.create([Grid,ExtBaseWidget],{
 	 
 	 //this.store.data = data;
 	  this.store.totalCount= total;
+	 
 	  this.store.pageSize = pageSize;
 	  this.store.currentPage = page;
 	 this.store.loadData(data,false);
      
+	 this.ext.setHeight(ROW_HEIGHT * pageSize);
      this.paginator.onLoad();
      this.ext.getView().refresh();
+     
+     this.getPage().ext.doLayout();
  }
  
  

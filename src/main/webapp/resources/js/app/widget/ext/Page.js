@@ -10,6 +10,7 @@ var ExtPage = fw.create([Page,ExtBaseWidget],{
 	 this.ext = Ext.create('Ext.panel.Panel', {
 		    title: this.title,
 		  items:items,
+		  layout: 'fit',
 		   // width: 1200,		   
 		    //height:1800,		    
 		    renderTo:renderTo
@@ -20,7 +21,7 @@ var ExtPage = fw.create([Page,ExtBaseWidget],{
   
   render : function(out) {	  
 	  this.rendered = true;
-    out.push('<div id="'+this.uuid+'" style="margin:50px;">');
+    out.push('<div id="'+this.uuid+'" >');
    
     this.renderChildren(out);
      

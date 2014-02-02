@@ -7,13 +7,12 @@ var Controller = fw.create([Widget],{
 		this.models = new Array();
 		this.data = null;
 		this.model = null;
-		if(this.pageSize==null){
+		if(this.pageSize==null || this.pageSize == 0){
 			this.pageSize = 10;
 		} 
 		if(this.currentPage==null){
 			this.currentPage = 0;
-		}
-		//this.rowChangeListeners = new Array();	
+		}	
   },
   
   renderCompleted:function(){
@@ -28,7 +27,7 @@ var Controller = fw.create([Widget],{
 
   },
   
-  search:function(){
+  search:function(afterSearchListener){
 	 var wgt = this; 
 	 var res = this.doSearch();
 	 res.done(function(resp){
@@ -37,7 +36,9 @@ var Controller = fw.create([Widget],{
 		
 		
 		wgt.setModels(models);
-		
+		if(afterSearchListener!=null){
+			afterSearchListener(models);
+		}
 	 });
   },
   
@@ -52,7 +53,7 @@ var Controller = fw.create([Widget],{
   
   addGrid:function(grid){
 	var wgt = this;
-	
+	grid.pageSize = this.pageSize;
 	grid.onRowChange(function(row,selected){
 		console.log(row+" "+selected);
 		wgt.setSelectedIndex(row);
@@ -88,11 +89,19 @@ var Controller = fw.create([Widget],{
   
   filter:function(filter){
 	  return this.models.filter(function(obj) {
+		   
+		    
 		    return Object.keys(filter).every(function(c) {
 		    	if(filter[c]==null || filter[c]==""){
 		    	return true;
 		    	}
-		      return obj[c] == filter[c];
+		    	 var reg = new RegExp( filter[c]);
+		    	
+		    	if(obj[c].match(reg)){
+		    		return true;
+		    	};
+		    	return false;
+		      //return obj[c] == filter[c];
 		    });
 		  });
   },
@@ -181,8 +190,9 @@ var Controller = fw.create([Widget],{
 	  if(models.total==null){		 
 		  var from = this.getFrom();
 		  var to = from + this.pageSize;
-		  console.log("FROM:"+from);
-		  console.log("TO:"+to);
+		  if(to>models.length){
+			  to = models.length;
+		  }
 		  for(var i=from;i<to;i++){
 			  pagedModels.push(models[i]);
 		  }
@@ -238,12 +248,12 @@ var Controller = fw.create([Widget],{
 	  
   },
   
-  setPageSize:function(){
-	  return this.pageSize;
+  setPageSize:function(pageSize){
+	  this.pageSize = pageSize;
   },
   
-  getPageSize:function(pageSize){
-	  this.pageSize = pageSize;
+  getPageSize:function(){
+	  return this.pageSize;
   }
   
   
